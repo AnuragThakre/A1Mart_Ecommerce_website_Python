@@ -5,7 +5,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator,MinValueValidator
 
+
 # Create your models here.
+CITY_CHOICES= (
+    ("MU","MUMBAI"),
+    ("PU","PUNE")
+)
 STATE_CHOICES = (
    ("AN","Andaman and Nicobar Islands"),
    ("AP","Andhra Pradesh"),
@@ -45,11 +50,12 @@ STATE_CHOICES = (
    ("UK","Uttarakhand"),
    ("WB","West Bengal")
 )
+
 class Customer(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=200)
     locality=models.CharField(max_length=200)
-    city=models.CharField(max_length=50)
+    city=models.CharField(choices=CITY_CHOICES,max_length=50)
     zipcode=models.IntegerField() 
     state=models.CharField(choices=STATE_CHOICES, max_length=50)
 
